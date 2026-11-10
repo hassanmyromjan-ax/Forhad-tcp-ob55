@@ -6,3 +6,4 @@ protobuf-decoder
 cfonts
 urllib3
 protobuf
+requests
