@@ -27,6 +27,22 @@ import time
 import sys
 import uuid
 from datetime import datetime
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
+
+class DummyHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is running!")
+
+def run_dummy_server():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(('0.0.0.0', port), DummyHandler)
+    server.serve_forever()
+
+# ব্যাকগ্রাউন্ডে ডামি সার্ভার চালু করা যাতে Render পোর্ট পেয়ে যায়
+threading.Thread(target=run_dummy_server, daemon=True).start()
 
 import aiohttp
 import httpx
