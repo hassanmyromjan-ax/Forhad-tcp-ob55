@@ -7,3 +7,5 @@ cfonts
 urllib3
 protobuf
 requests
+psutil
+setuptools
